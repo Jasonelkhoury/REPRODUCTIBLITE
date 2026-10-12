@@ -1,0 +1,42 @@
+
+name: Reproduce TP1 results
+
+on:
+  push:
+    branches:
+      - "**"
+
+permissions:
+  contents: write
+
+jobs:
+  reproduce:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Build Docker image
+        run: docker build -t rep-lab2 .
+
+      - name: Run experiments
+        run: |
+          docker run --rm \
+            --user "$(id -u):$(id -g)" \
+            -v "$GITHUB_WORKSPACE:/app" \
+            rep-lab2
+
+      - name: Commit and push answer files
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add answer_associativity.txt answer_banking.txt
+
+          if git diff --cached --quiet; then
+            echo "No changes in answer files."
+          else
+            git commit -m "Update reproducibility results"
+            git push
+          fi

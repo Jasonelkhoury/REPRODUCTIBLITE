@@ -1,30 +1,9 @@
 # Associativité des nombres flottants et problème bancaire
 
-## 1. Description
-
-Ce projet contient deux expériences réalisées en Python 3 :
-
-- **Expérience 1 — Associativité :** mesurer la proportion de cas où \((x+y)+z = x+(y+z)\) pour des nombres flottants générés aléatoirement.
-- **Expérience 2 — Problème bancaire :** calculer le solde final après 50 ans en utilisant le type `Decimal` pour limiter les erreurs d'arrondi.
-
-Les résultats de chaque expérience sont enregistrés dans un fichier texte.
 
 
-## 2. Exécution
 
-Depuis le répertoire contenant `tp1.py`, exécuter :
-
-```bash
-python3 tp1.py
-```
-
-Le programme crée ou remplace les fichiers suivants dans le répertoire de travail courant :
-
-- `answer_associativity.txt`
-- `answer_banking.txt`
-
-
-## 5. Expérience 1 — Associativité
+## 1. Expérience 1 — Associativité
 
 ### Choix expérimentaux
 
@@ -50,7 +29,7 @@ Percentage of equality: 82.500000%
 ```
 
 
-## 6. Expérience 2 — Problème bancaire
+## 2. Expérience 2 — Problème bancaire
 
 ### Choix expérimentaux
 
@@ -64,7 +43,6 @@ Percentage of equality: 82.500000%
 | Frais de retrait final | 1 € |
 | Précision décimale | 100 chiffres significatifs |
 
-Le solde initial est calculé à partir de l'exponentielle de 1 :
 
 ### Résultats attendus
 
@@ -78,18 +56,17 @@ Final balance: 0.019992165836667903219891152066054769364655840492696650225231297
 ```
 
 
-## 7. Reproductibilité
+## 3. Automatisation avec GitHub Actions
+Les résultats des deux expériences sont générés automatiquement par un workflow GitHub Actions défini dans .github/workflows/reproduce.yml.
 
-Pour reproduire les expériences :
+À chaque push sur une branche du dépôt, le workflow :
 
-1. Cloner ou télécharger le dépôt.
-2. Vérifier que Python 3 est installé.
-3. Exécuter `python3 tp1.py`.
-4. Comparer les fichiers générés avec les résultats attendus présentés dans ce README.
+1. Récupère le code source.
 
-Pour l'expérience sur l'associativité, la graine aléatoire doit rester fixée à `152` et les paramètres de génération doivent être conservés.
+2. Construit l'image Docker à partir du Dockerfile.
 
-Pour l'expérience bancaire, les paramètres, l'ordre des opérations et la précision doivent rester identiques.
+3. Exécute le programme Python dans un conteneur.
 
+4. Génère answer_associativity.txt et answer_banking.txt.
 
-
+5. Enregistre et pousse les fichiers de résultats dans le dépôt si leur contenu a changé.
