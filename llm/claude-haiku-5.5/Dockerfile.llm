@@ -3,8 +3,8 @@ FROM eclipse-temurin:21-jdk
 
 WORKDIR /app
 
-COPY AssociativityTest.java .
-COPY BankingLLM.java .
+COPY llm/claude-haiku-5.5/AssociativityTest.java .
+COPY llm/claude-haiku-5.5/BankingLLM.java .
 
 RUN javac AssociativityTest.java BankingLLM.java
 

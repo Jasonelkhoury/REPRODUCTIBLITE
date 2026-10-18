@@ -33,13 +33,15 @@ jobs:
       - name: Run LLM associativity experiment
         run: |
           docker run --rm \
-            -v "$GITHUB_WORKSPACE:/app" \
+            -v "$GITHUB_WORKSPACE:/workspace" \
+            -w /workspace/llm/claude-haiku-5.5 \
             tp1-llm java AssociativityTest
 
       - name: Run LLM banking experiment
         run: |
           docker run --rm \
-            -v "$GITHUB_WORKSPACE:/app" \
+            -v "$GITHUB_WORKSPACE:/workspace" \
+            -w /workspace/llm/claude-haiku-5.5 \
             tp1-llm java BankingLLM
 
       - name: Commit and push answer files
