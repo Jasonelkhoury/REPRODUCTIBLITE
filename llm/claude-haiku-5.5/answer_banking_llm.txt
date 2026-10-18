@@ -1,0 +1,11 @@
+=== Banking investment reproducibility lab ===
+Scheme: deposit e; each year take 1 euro fee, multiply by year number; 1 euro retrieval fee at the end.
+
+Initial balance (e): 2.71828182845904523536028747135266249775724709369996 euros
+Number of years: 50
+Balance after year 50 (before retrieval fee): 1.019992165837 euros
+Final balance (after 1 euro retrieval fee): 0.019992165837 euros
+
+Cross-check (closed form, independent of e):
+  Balance before retrieval fee: 1.019992165837 euros
+  Absolute difference from simulation: 1.812e-86

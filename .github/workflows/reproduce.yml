@@ -26,13 +26,28 @@ jobs:
             --user "$(id -u):$(id -g)" \
             -v "$GITHUB_WORKSPACE:/app" \
             rep-lab2
+      
+      - name: Build LLM Java Docker image
+        run: docker build -f llm/claude-haiku-5.5/Dockerfile.llm -t tp1-llm .
+
+      - name: Run LLM associativity experiment
+        run: |
+          docker run --rm \
+            -v "$GITHUB_WORKSPACE:/app" \
+            tp1-llm java AssociativityTest
+
+      - name: Run LLM banking experiment
+        run: |
+          docker run --rm \
+            -v "$GITHUB_WORKSPACE:/app" \
+            tp1-llm java BankingLLM
 
       - name: Commit and push answer files
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add answer_associativity.txt answer_banking.txt
+          git add answer_associativity.txt answer_banking.txt answer_associativity_llm.txt answer_banking_llm.txt
 
           if git diff --cached --quiet; then
             echo "No changes in answer files."
