@@ -8,4 +8,4 @@ Final balance (after 1 euro retrieval fee): 0.019992165837 euros
 
 Cross-check (closed form, independent of e):
   Balance before retrieval fee: 1.019992165837 euros
-  Absolute difference from simulation: 1,812e-86
+  Absolute difference from simulation: 1.812e-86
