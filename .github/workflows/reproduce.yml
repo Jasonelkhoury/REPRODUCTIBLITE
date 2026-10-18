@@ -49,8 +49,10 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add answer_associativity.txt answer_banking.txt answer_associativity_llm.txt answer_banking_llm.txt
-
+          git add answer_associativity.txt answer_banking.txt
+          git add llm/claude-haiku-5.5/answer_associativity_llm.txt
+          git add llm/claude-haiku-5.5/answer_banking_llm.txt
+          
           if git diff --cached --quiet; then
             echo "No changes in answer files."
           else
