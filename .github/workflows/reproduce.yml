@@ -49,7 +49,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add answer_associativity.txt answer_banking.txt
+          git add answer_associativity.txt answer_distributivity.txt answer_banking.txt
           git add llm/L2/answer_associativity_llm.txt
           git add llm/L2/answer_banking_llm.txt
           

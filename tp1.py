@@ -14,14 +14,14 @@ class tp1:
             x = random.uniform(MIN_VALUE,MAX_VALUE)
             y = random.uniform(MIN_VALUE,MAX_VALUE)
             z = random.uniform(MIN_VALUE,MAX_VALUE)
-            if (x+y)+z==x+(y+z):
+            if  (x * (y + z) == x * y + x * z):
                 equal_count+=1
                 
         percentage = equal_count / NUMBER_OF_TESTS * 100
-        with open("answer_associativity.txt", "w") as file:
+        with open("answer_distributivity.txt", "w") as file:
             file.write(f"Number of tests: {NUMBER_OF_TESTS}\n")
             file.write(f"Equal results: {equal_count}\n")
-            file.write(f"Different results: {NUMBER_OF_TESTS - 1 - equal_count}\n")
+            file.write(f"Different results: {NUMBER_OF_TESTS - equal_count}\n")
             file.write(f"Percentage of equality: {percentage:.6f}%\n")
         
     
@@ -48,6 +48,6 @@ class tp1:
 if __name__ == "__main__":
     tp1 = tp1()
     tp1.ex1()
-    tp1.ex2()
+    #tp1.ex2()
 
     

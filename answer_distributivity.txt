@@ -1,0 +1,4 @@
+Number of tests: 1000
+Equal results: 670
+Different results: 330
+Percentage of equality: 67.000000%
