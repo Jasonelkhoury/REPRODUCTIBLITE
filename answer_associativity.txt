@@ -1,4 +1,25 @@
+Number of tests: 100
+Equal results: 81
+Different results: 19
+Percentage of equality: 81.000000%
+
 Number of tests: 1000
 Equal results: 825
-Different results: 174
+Different results: 175
 Percentage of equality: 82.500000%
+
+Number of tests: 10000
+Equal results: 8244
+Different results: 1756
+Percentage of equality: 82.440000%
+
+Number of tests: 100000
+Equal results: 82838
+Different results: 17162
+Percentage of equality: 82.838000%
+
+Number of tests: 1000000
+Equal results: 828299
+Different results: 171701
+Percentage of equality: 82.829900%
+
