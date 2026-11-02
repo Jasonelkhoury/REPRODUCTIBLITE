@@ -1,0 +1,17 @@
+Floating-point associativity experiment
+Python version: 3.12.3
+Interval: [0, 1)
+Random seed: 42
+
+Total tests: 1,000
+Equal results: 820
+Different results: 180
+Percentage equal: 82.0000%
+
+First counterexample found:
+  x = 0.09671637683346401
+  y = 0.8474943663474598
+  z = 0.6037260313668911
+  (x + y) + z = 1.5479367745478148
+  x + (y + z) = 1.547936774547815
+  exact difference (Fraction) = -2.220446049250313e-16

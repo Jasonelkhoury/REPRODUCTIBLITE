@@ -28,20 +28,20 @@ jobs:
             rep-lab2
       
       - name: Build LLM Java Docker image
-        run: docker build -f llm/claude-haiku-5.5/Dockerfile.llm -t tp1-llm .
+        run: docker build -f llm/L2/Dockerfile.llm -t tp1-llm .
 
       - name: Run LLM associativity experiment
         run: |
           docker run --rm \
             -v "$GITHUB_WORKSPACE:/workspace" \
-            -w /workspace/llm/claude-haiku-5.5 \
+            -w /workspace/llm/L2 \
             tp1-llm java AssociativityTest
 
       - name: Run LLM banking experiment
         run: |
           docker run --rm \
             -v "$GITHUB_WORKSPACE:/workspace" \
-            -w /workspace/llm/claude-haiku-5.5 \
+            -w /workspace/llm/L2 \
             tp1-llm java BankingLLM
 
       - name: Commit and push answer files
@@ -50,8 +50,8 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
           git add answer_associativity.txt answer_banking.txt
-          git add llm/claude-haiku-5.5/answer_associativity_llm.txt
-          git add llm/claude-haiku-5.5/answer_banking_llm.txt
+          git add llm/L2/answer_associativity_llm.txt
+          git add llm/L2/answer_banking_llm.txt
           
           if git diff --cached --quiet; then
             echo "No changes in answer files."

@@ -70,3 +70,21 @@ Les résultats des deux expériences sont générés automatiquement par un work
 4. Génère answer_associativity.txt et answer_banking.txt.
 
 5. Enregistre et pousse les fichiers de résultats dans le dépôt si leur contenu a changé.
+
+
+## Reproduire les résultats avec Nix
+
+# Lab3 : Comparaison des résultats 
+
+## Matrice de comparaison
+
+| Mesure | Programme 1 : Python original | Programme 2 : Java généré par LLM | Programme 3 : Python généré par LLM |
+|---|---:|---:|---:|
+| Nombre de tests  | 1 000 | 1 000 000 | 1 000 000 |
+| Cas où les résultats sont égaux | 825 | 930 671 | 930 720 |
+| Cas où les résultats sont différents | 174 | 69 329 | 69 280 |
+| Pourcentage d'égalité | 82,5 % | 93,0671 % | 93,0720 % |
+| Graine aléatoire | 152 | 42 | 42 |
+| Intervalle des valeurs générées | \([0,1]\) | \([-10^6,10^6)\) | \([-10^6,10^6)\) |
+| Type numérique | `float` Python | `double` Java | `float` Python |
+
