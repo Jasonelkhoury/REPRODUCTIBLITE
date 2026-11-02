@@ -1,0 +1,42 @@
+import java.util.Random;
+
+public class {{ class_name }} {
+    private static final int REPETITIONS = {{ repetitions }};
+    private static final long SEED = {{ seed }};
+    private static final double MIN_VALUE = {{ min_value }};
+    private static final double MAX_VALUE = {{ max_value }};
+
+    public static void main(String[] args) {
+        Random rng = new Random(SEED);
+        int equalCount = 0;
+
+        for (int i = 0; i < REPETITIONS; i++) {
+            double x = MIN_VALUE + rng.nextDouble() * (MAX_VALUE - MIN_VALUE);
+            double y = MIN_VALUE + rng.nextDouble() * (MAX_VALUE - MIN_VALUE);
+            double z = MIN_VALUE + rng.nextDouble() * (MAX_VALUE - MIN_VALUE);
+
+            if ({{ lhs }} == {{ rhs }}) {
+                equalCount++;
+            }
+        }
+
+        int differentCount = REPETITIONS - equalCount;
+        double percentage = 100.0 * equalCount / REPETITIONS;
+
+        System.out.printf(
+            "{\"property\":\"%s\",\"type\":\"double\","
+            + "\"repetitions\":%d,\"seed\":%d,"
+            + "\"min_value\":%s,\"max_value\":%s,"
+            + "\"equal_count\":%d,\"different_count\":%d,"
+            + "\"percentage\":%.6f}%n",
+            "{{ property_name }}",
+            REPETITIONS,
+            SEED,
+            Double.toString(MIN_VALUE),
+            Double.toString(MAX_VALUE),
+            equalCount,
+            differentCount,
+            percentage
+        );
+    }
+}

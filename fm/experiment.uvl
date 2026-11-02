@@ -1,0 +1,79 @@
+// Reproducibility experiment - Variability model - 320 possible configurations
+
+features
+    Experiment
+        mandatory
+            Language {abstract}
+                alternative
+                    Python
+                        alternative
+                            CPython
+                            PyPy
+                    Java
+                        alternative
+                            OpenJDK
+                            GraalVM
+
+            Property {abstract}
+                alternative
+                    Associativity
+                    Distributivity
+
+            Repetitions {abstract}
+                alternative
+                    Tests100
+                    Tests1000
+                    Tests10_000
+                    Tests100_000
+                    Tests1_000_000
+
+            Interval {abstract}
+                alternative
+                    Interval01
+                    Interval1_000_000
+
+            Seed {abstract}
+                alternative
+                    Seed42
+                    Seed152
+
+            NumericType {abstract}
+                alternative
+                    PythonFloat
+                    JavaDouble
+
+            RandomGenerator {abstract}
+                alternative
+                    JavaRandomGenerator {abstract}
+                        alternative
+                            JavaRandom
+                            JavaSecureRandom
+                    PythonRandomGenerator {abstract}
+                        alternative
+                            PythonRandom
+                            PythonSystemRandom
+
+constraints
+    // Language and runtime compatibility
+    CPython => Python
+    PyPy => Python
+    OpenJDK => Java
+    GraalVM => Java
+
+    // Random generator compatibility
+    Python => PythonRandomGenerator
+    Java => JavaRandomGenerator
+
+    PythonRandomGenerator => Python
+    JavaRandomGenerator => Java
+
+    // Numeric type compatibility
+    Python => PythonFloat
+    Java => JavaDouble
+
+    PythonFloat => Python
+    JavaDouble => Java
+
+    // Exclude generators that do not support reproducible seeded sequences
+    !JavaSecureRandom
+    !PythonSystemRandom

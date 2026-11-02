@@ -1,0 +1,7 @@
+OpenJDK,True
+Associativity,True
+Tests1_000_000,True
+Interval1_000_000,True
+Seed42,True
+JavaDouble,True
+JavaRandom,True

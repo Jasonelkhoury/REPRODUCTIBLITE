@@ -1,0 +1,7 @@
+CPython,True
+Associativity,True
+Tests1_000_000,True
+Interval1_000_000,True
+Seed42,True
+PythonFloat,True
+PythonRandom,True
