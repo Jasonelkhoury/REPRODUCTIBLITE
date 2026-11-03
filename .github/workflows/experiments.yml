@@ -1,0 +1,182 @@
+name: Reproducibility Experiments
+
+on:
+  push:
+    paths-ignore:
+      - "part7/results.csv"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  run-experiments:
+    name: Run on ${{ matrix.runner }}
+
+    runs-on: ${{ matrix.runner }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        runner:
+          - ubuntu-24.04
+          - ubuntu-24.04-arm
+
+    steps:
+      # Get the repo
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Install python
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # Install the dpendencies needed
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install jinja2
+
+
+      # Generate the sample csv file
+      - name: Generate sample configurations
+        run: |
+          python3 sample.py fm/experiment.uvl \
+            --size 30 \
+            --seed 1 \
+            --include configs/*.csvconf \
+            -o configs/sample.csv
+
+      # Build the docker images
+      - name: Prepare Docker containers
+        run: |
+          python3 part6/build_docker_images.py
+
+      # Execute the experiments
+      - name: Run experiments
+        run: |
+          python3 part6/run_experiments.py
+
+      #  Add runner name to results
+      - name: Add runner information
+        env:
+          RUNNER_NAME: ${{ matrix.runner }}
+        run: |
+          python3 - <<'PY'
+          import csv
+          import os
+          from pathlib import Path
+
+          input_file = Path("part6/results.csv")
+          output_file = Path(
+              f"part6/results-{os.environ['RUNNER_NAME']}.csv"
+          )
+
+          with input_file.open("r", newline="") as source:
+              reader = csv.DictReader(source)
+              fieldnames = list(reader.fieldnames) + ["runner"]
+              rows = list(reader)
+
+          with output_file.open("w", newline="") as destination:
+              writer = csv.DictWriter(
+                  destination,
+                  fieldnames=fieldnames
+              )
+              writer.writeheader()
+
+              for row in rows:
+                  row["runner"] = os.environ["RUNNER_NAME"]
+                  writer.writerow(row)
+
+          print(f"Results saved to {output_file}")
+          PY
+
+      # Save results as artefacts
+      - name: Upload results
+        uses: actions/upload-artifact@v4
+        with:
+          name: results-${{ matrix.runner }}
+          path: part6/results-${{ matrix.runner }}.csv
+          if-no-files-found: error
+
+  # This job is executed after that the two runners finished their jobs
+  collect-results:
+    name: Collect and store results
+
+    needs: run-experiments
+    runs-on: ubuntu-24.04
+
+    steps:
+      # Get the repo
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Download results of the 2 runners
+      - name: Download results
+        uses: actions/download-artifact@v4
+        with:
+          pattern: results-*
+          path: artifacts
+          merge-multiple: true
+
+      # Merge the 2 csv files
+      - name: Merge results
+        run: |
+          mkdir -p part7
+
+          python3 - <<'PY'
+          import csv
+          from pathlib import Path
+
+          files = sorted(Path("artifacts").glob("results-*.csv"))
+
+          if not files:
+              raise RuntimeError("No result files were downloaded.")
+
+          all_rows = []
+          fieldnames = None
+
+          for file in files:
+              print(f"Reading {file}")
+
+              with file.open("r", newline="") as source:
+                  reader = csv.DictReader(source)
+
+                  if fieldnames is None:
+                      fieldnames = reader.fieldnames
+                  elif reader.fieldnames != fieldnames:
+                      raise RuntimeError(
+                          f"Inconsistent CSV columns in {file}"
+                      )
+
+                  all_rows.extend(reader)
+
+          output_file = Path("part7/results.csv")
+
+          with output_file.open("w", newline="") as destination:
+              writer = csv.DictWriter(
+                  destination,
+                  fieldnames=fieldnames
+              )
+              writer.writeheader()
+              writer.writerows(all_rows)
+
+          print(f"Combined {len(all_rows)} rows into {output_file}")
+          PY
+
+      # Save the csv file
+      - name: Commit results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add part7/results.csv
+
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "Update reproducibility experiment results"
+            git push origin HEAD:${GITHUB_REF_NAME}
+          fi
