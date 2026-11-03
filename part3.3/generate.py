@@ -2,12 +2,12 @@ from pathlib import Path
 
 from jinja2 import Template
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parent.parent
 
 PYTHON_TEMPLATE_PATH = ROOT / "property_template.py.jinja"
 JAVA_TEMPLATE_PATH = ROOT / "property_template.java.jinja"
 
-OUTPUT_DIR = ROOT / "generated" / "part3.3"
+OUTPUT_DIR = ROOT / "part3.3" / "generated"
 
 REPETITIONS = 10_000
 SEED = 152

@@ -1,8 +1,7 @@
 import json
 import random
-import numpy as np
 
-PROPERTY = "distributivity"
+PROPERTY = "associativity_add"
 REPETITIONS = 10000
 SEED = 152
 MIN_VALUE = 0.0
@@ -28,7 +27,7 @@ def check_property():
         y = NUMBER_TYPE(rng.uniform(MIN_VALUE, MAX_VALUE))
         z = NUMBER_TYPE(rng.uniform(MIN_VALUE, MAX_VALUE))
 
-        if x * (y + z) == x * y + x * z:
+        if (x + y) + z == x + (y + z):
             equal_count += 1
 
     different_count = REPETITIONS - equal_count

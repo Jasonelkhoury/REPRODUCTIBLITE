@@ -1,6 +1,5 @@
 import json
 import random
-import numpy as np
 
 PROPERTY = "distributivity"
 REPETITIONS = 10000
@@ -10,8 +9,8 @@ MAX_VALUE = 1.0
 
 # Numeric type selection
 
-NUMBER_TYPE = np.float32
-TYPE_LABEL = "float32"
+NUMBER_TYPE = float
+TYPE_LABEL = "float64"
 
 
 # Random generator selection
