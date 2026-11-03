@@ -24,16 +24,8 @@ JAVA_TEMPLATE_PATH = ROOT / "property_template.java.jinja"
 GENERATED_DIR = PART6_DIR / "generated"
 RESULTS_PATH = PART6_DIR / "results.csv"
 
+RUNS_PER_CONFIGURATION = 3
 
-# ============================================================
-# EXPERIMENT PARAMETERS
-# ============================================================
-
-RUNS_PER_CONFIGURATION = 5
-
-# Chaque exécution utilise une graine différente :
-# seed, seed + 1, seed + 2, etc.
-VARY_SEED_PER_RUN = True
 
 
 # ============================================================
@@ -419,10 +411,7 @@ def execute_java(configuration, source_path, class_name):
 def run_configuration(config_id, configuration, run_index):
     """Generate and execute one run of a configuration."""
 
-    if VARY_SEED_PER_RUN:
-        execution_seed = configuration["seed"] + run_index - 1
-    else:
-        execution_seed = configuration["seed"]
+    execution_seed = configuration["seed"]
 
     run_directory = GENERATED_DIR / safe_name(config_id)
     run_directory.mkdir(parents=True, exist_ok=True)
