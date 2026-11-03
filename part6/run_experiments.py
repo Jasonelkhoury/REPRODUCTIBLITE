@@ -247,7 +247,7 @@ def check_docker_images(environments):
         if result.returncode != 0:
             raise RuntimeError(
                 f"Docker image not found: {image}\n"
-                "Run: python3 part6/prepare_docker_containers.py"
+                "Run: python3 part6/build_docker_images.py"
             )
 
 
