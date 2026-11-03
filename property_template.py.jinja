@@ -7,11 +7,26 @@ SEED = {{ seed }}
 MIN_VALUE = {{ min_value }}
 MAX_VALUE = {{ max_value }}
 
+# Numeric type selection
+{% if numeric_type == "PythonFloat32" %}
+import numpy as np
+NUMBER_TYPE = np.float32
+TYPE_LABEL = "float32"
+{% elif numeric_type == "PythonFloat64" %}
 NUMBER_TYPE = float
+TYPE_LABEL = "float64"
+{% endif %}
+
+# Random generator selection
+{% if random_generator == "PythonRandom" %}
+rng = random.Random(SEED)
+{% elif random_generator == "PythonNumPyRandom" %}
+import numpy as np
+rng = np.random.default_rng(SEED)
+{% endif %}
 
 
 def check_property():
-    rng = random.Random(SEED)
     equal_count = 0
 
     for _ in range(REPETITIONS):
@@ -26,7 +41,8 @@ def check_property():
 
     return {
         "property": PROPERTY,
-        "type": "float",
+        "type": TYPE_LABEL,
+        "random_generator": "{{ random_generator }}",
         "repetitions": REPETITIONS,
         "seed": SEED,
         "min_value": MIN_VALUE,

@@ -18,10 +18,10 @@ class tp1:
                 equal_count+=1
                 
         percentage = equal_count / NUMBER_OF_TESTS * 100
-        with open("answer_associativity.txt", "w") as file:
+        with open("part3.4/pypy.txt", "w") as file:
             file.write(f"Number of tests: {NUMBER_OF_TESTS}\n")
             file.write(f"Equal results: {equal_count}\n")
-            file.write(f"Different results: {NUMBER_OF_TESTS - 1 - equal_count}\n")
+            file.write(f"Different results: {NUMBER_OF_TESTS - equal_count}\n")
             file.write(f"Percentage of equality: {percentage:.6f}%\n")
         
     

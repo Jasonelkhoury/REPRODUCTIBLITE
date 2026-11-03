@@ -1,0 +1,13 @@
+Number of tests: 1000
+Equal results: 825
+Different results: 175
+Percentage of equality: 82.500000%
+
+
+# Used command : 
+% docker run --rm \
+  -v "$PWD:/app" \
+  -w /app \
+  python:3.12-slim \
+  sh -c 'python -c "import sys; print(\"Implementation:\", sys.implementation.name); print(\"Version:\", sys.version)" && python tp1.py' \
+  | tee part3.4/cpython.txt

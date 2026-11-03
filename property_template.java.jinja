@@ -1,19 +1,39 @@
 import java.util.Random;
+import java.util.SplittableRandom;
+import java.util.random.RandomGenerator;
 
 public class {{ class_name }} {
+
     private static final int REPETITIONS = {{ repetitions }};
     private static final long SEED = {{ seed }};
     private static final double MIN_VALUE = {{ min_value }};
     private static final double MAX_VALUE = {{ max_value }};
 
+    private static final String TYPE_LABEL = "{{ type_label }}";
+    private static final String RANDOM_GENERATOR = "{{ random_generator }}";
+
     public static void main(String[] args) {
-        Random rng = new Random(SEED);
+
+        // Random generator selection
+        {% if random_generator == "JavaRandom" %}
+        RandomGenerator rng = new Random(SEED);
+        {% elif random_generator == "JavaSplittableRandom" %}
+        RandomGenerator rng = new SplittableRandom(SEED);
+        {% endif %}
+
         int equalCount = 0;
 
         for (int i = 0; i < REPETITIONS; i++) {
-            double x = MIN_VALUE + rng.nextDouble() * (MAX_VALUE - MIN_VALUE);
-            double y = MIN_VALUE + rng.nextDouble() * (MAX_VALUE - MIN_VALUE);
-            double z = MIN_VALUE + rng.nextDouble() * (MAX_VALUE - MIN_VALUE);
+
+            // Numeric type selection
+            {{ type_name }} x = ({{ type_name }})
+                (MIN_VALUE + rng.nextDouble() * (MAX_VALUE - MIN_VALUE));
+
+            {{ type_name }} y = ({{ type_name }})
+                (MIN_VALUE + rng.nextDouble() * (MAX_VALUE - MIN_VALUE));
+
+            {{ type_name }} z = ({{ type_name }})
+                (MIN_VALUE + rng.nextDouble() * (MAX_VALUE - MIN_VALUE));
 
             if ({{ lhs }} == {{ rhs }}) {
                 equalCount++;
@@ -24,12 +44,15 @@ public class {{ class_name }} {
         double percentage = 100.0 * equalCount / REPETITIONS;
 
         System.out.printf(
-            "{\"property\":\"%s\",\"type\":\"double\","
+            "{\"property\":\"%s\",\"type\":\"%s\","
+            + "\"random_generator\":\"%s\","
             + "\"repetitions\":%d,\"seed\":%d,"
             + "\"min_value\":%s,\"max_value\":%s,"
             + "\"equal_count\":%d,\"different_count\":%d,"
             + "\"percentage\":%.6f}%n",
             "{{ property_name }}",
+            TYPE_LABEL,
+            RANDOM_GENERATOR,
             REPETITIONS,
             SEED,
             Double.toString(MIN_VALUE),

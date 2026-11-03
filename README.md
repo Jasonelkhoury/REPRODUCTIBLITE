@@ -88,3 +88,26 @@ Les résultats des deux expériences sont générés automatiquement par un work
 | Intervalle des valeurs générées | \([0,1]\) | \([-10^6,10^6)\) | \([-10^6,10^6)\) |
 | Type numérique | `float` Python | `double` Java | `float` Python |
 
+
+## Partie 3.4
+
+
+Pour étudier l'influence de l'environnement d'exécution sur la reproductibilité des résultats, nous avons exécuté le même programme Python dans deux environnements différents : CPython 3.12 et PyPy 3.12. Les deux environnements ont été isolés à l'aide de Docker.
+
+Afin de garantir une comparaison pertinente, nous avons conservé le même code source et les mêmes paramètres expérimentaux, notamment la propriété testée, le nombre de répétitions, la graine aléatoire et l'intervalle des valeurs générées.
+
+Les résultats de chaque exécution sont enregistrés dans les fichiers suivants :
+
+part3.4/cpython.txt : résultats obtenus avec CPython 3.12 ;
+
+part3.4/pypy.txt : résultats obtenus avec PyPy 3.12.
+
+Résultats : aucune différence n'a été observée entre les deux environnements pour cette expérience. Les résultats obtenus sont identiques malgré le changement d'implémentation de Python.
+
+Cette expérience montre que, pour le programme et les paramètres étudiés, le changement d'environnement entre CPython et PyPy n'a pas affecté les résultats. Cette observation reste limitée aux conditions de cette expérience et ne garantit pas que les deux environnements produiront toujours des résultats identiques pour d'autres programmes ou paramètres.
+
+
+utiliser une arbre de précision
+clustrering ? 
+
+

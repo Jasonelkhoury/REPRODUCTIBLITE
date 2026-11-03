@@ -3,5 +3,5 @@ Associativity,True
 Tests1000,True
 Interval01,True
 Seed152,True
-PythonFloat,True
+PythonFloat64,True
 PythonRandom,True

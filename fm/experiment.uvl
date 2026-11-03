@@ -39,19 +39,25 @@ features
 
             NumericType {abstract}
                 alternative
-                    PythonFloat
-                    JavaDouble
+                    PythonNumericType {abstract}
+                        alternative
+                            PythonFloat32
+                            PythonFloat64
+                    JavaNumericType {abstract}
+                        alternative
+                            JavaFloat
+                            JavaDouble
 
             RandomGenerator {abstract}
                 alternative
                     JavaRandomGenerator {abstract}
                         alternative
                             JavaRandom
-                            JavaSecureRandom
+                            JavaSplittableRandom
                     PythonRandomGenerator {abstract}
                         alternative
                             PythonRandom
-                            PythonSystemRandom
+                            PythonNumPyRandom
 
 constraints
     // Language and runtime compatibility
@@ -68,12 +74,13 @@ constraints
     JavaRandomGenerator => Java
 
     // Numeric type compatibility
-    Python => PythonFloat
-    Java => JavaDouble
+    Python => PythonNumericType
+    Java => JavaNumericType
 
-    PythonFloat => Python
-    JavaDouble => Java
+    PythonNumericType => Python
+    JavaNumericType => Java
 
-    // Exclude generators that do not support reproducible seeded sequences
-    !JavaSecureRandom
-    !PythonSystemRandom
+    // PyPy compatibility restrictions
+    PyPy => !PythonFloat32
+    PyPy => !PythonNumPyRandom
+

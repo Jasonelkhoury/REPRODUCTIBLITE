@@ -8,11 +8,19 @@ SEED = 152
 MIN_VALUE = 0.0
 MAX_VALUE = 1.0
 
+# Numeric type selection
+
 NUMBER_TYPE = np.float32
+TYPE_LABEL = "float32"
+
+
+# Random generator selection
+
+rng = random.Random(SEED)
+
 
 
 def check_property():
-    rng = random.Random(SEED)
     equal_count = 0
 
     for _ in range(REPETITIONS):
@@ -27,7 +35,8 @@ def check_property():
 
     return {
         "property": PROPERTY,
-        "type": str(NUMBER_TYPE.__name__),
+        "type": TYPE_LABEL,
+        "random_generator": "PythonRandom",
         "repetitions": REPETITIONS,
         "seed": SEED,
         "min_value": MIN_VALUE,
