@@ -62,7 +62,7 @@ jobs:
       #  Add runner name to results
       - name: Add runner information
         env:
-          RUNNER_NAME: ${{ matrix.runner }}
+          MATRIX_RUNNER: ${{ matrix.runner }}
         run: |
           python3 - <<'PY'
           import csv
@@ -71,7 +71,7 @@ jobs:
 
           input_file = Path("part6/results.csv")
           output_file = Path(
-              f"part6/results-{os.environ['RUNNER_NAME']}.csv"
+              f"part6/results-{os.environ['MATRIX_RUNNER']}.csv"
           )
 
           with input_file.open("r", newline="") as source:
@@ -87,7 +87,7 @@ jobs:
               writer.writeheader()
 
               for row in rows:
-                  row["runner"] = os.environ["RUNNER_NAME"]
+                  row["runner"] = os.environ["MATRIX_RUNNER"]
                   writer.writerow(row)
 
           print(f"Results saved to {output_file}")
