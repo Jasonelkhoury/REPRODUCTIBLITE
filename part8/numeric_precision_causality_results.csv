@@ -1,0 +1,7 @@
+config_id,origin_of_config,Language,Python,Java,Property,Repetitions,Interval,Seed,NumericType,PythonNumericType,JavaNumericType,RandomGenerator,JavaRandomGenerator,PythonRandomGenerator,results
+r01,random,Python,CPython,,Associativity,Tests100_000,Interval01,Seed42,PythonNumericType,PythonFloat64,,PythonRandomGenerator,,PythonRandom,82.759
+r01,random,Python,CPython,,Associativity,Tests100_000,Interval01,Seed42,PythonNumericType,PythonFloat64,,PythonRandomGenerator,,PythonRandom,82.759
+r01,random,Python,CPython,,Associativity,Tests100_000,Interval01,Seed42,PythonNumericType,PythonFloat64,,PythonRandomGenerator,,PythonRandom,82.759
+r02,random,Python,CPython,,Associativity,Tests100_000,Interval01,Seed42,PythonNumericType,PythonFloat32,,PythonRandomGenerator,,PythonRandom,74.616
+r02,random,Python,CPython,,Associativity,Tests100_000,Interval01,Seed42,PythonNumericType,PythonFloat32,,PythonRandomGenerator,,PythonRandom,74.616
+r02,random,Python,CPython,,Associativity,Tests100_000,Interval01,Seed42,PythonNumericType,PythonFloat32,,PythonRandomGenerator,,PythonRandom,74.616

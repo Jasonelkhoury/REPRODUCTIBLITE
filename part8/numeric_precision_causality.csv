@@ -1,0 +1,3 @@
+config_id,origin_of_config,Language,Python,Java,Property,Repetitions,Interval,Seed,NumericType,PythonNumericType,JavaNumericType,RandomGenerator,JavaRandomGenerator,PythonRandomGenerator
+r01,random,Python,CPython,,Associativity,Tests100_000,Interval01,Seed42,PythonNumericType,PythonFloat64,,PythonRandomGenerator,,PythonRandom
+r02,random,Python,CPython,,Associativity,Tests100_000,Interval01,Seed42,PythonNumericType,PythonFloat32,,PythonRandomGenerator,,PythonRandom

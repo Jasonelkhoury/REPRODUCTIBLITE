@@ -57,7 +57,7 @@ jobs:
       # Execute the experiments
       - name: Run experiments
         run: |
-          python3 part6/run_experiments.py
+          python3 python part6/run_experiments.py --sample configs/sample.csv --generated-dir part7/generated --results part7/results.csv
 
       #  Add runner name to results
       - name: Add runner information

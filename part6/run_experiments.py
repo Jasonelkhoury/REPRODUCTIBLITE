@@ -7,6 +7,7 @@ import sys
 
 from pathlib import Path
 from jinja2 import Template
+import argparse
 
 
 # ============================================================
@@ -16,13 +17,21 @@ from jinja2 import Template
 ROOT = Path(__file__).resolve().parent.parent
 PART6_DIR = Path(__file__).resolve().parent
 
-SAMPLE_PATH = ROOT / "configs" / "sample.csv"
 
 PYTHON_TEMPLATE_PATH = ROOT / "property_template.py.jinja"
 JAVA_TEMPLATE_PATH = ROOT / "property_template.java.jinja"
 
-GENERATED_DIR = PART6_DIR / "generated"
-RESULTS_PATH = PART6_DIR / "results.csv"
+parser = argparse.ArgumentParser()
+
+parser.add_argument("--sample", type=Path, required=True)
+parser.add_argument("--generated-dir", type=Path, required=True)
+parser.add_argument("--results", type=Path, required=True)
+
+args = parser.parse_args()
+
+SAMPLE_PATH = args.sample.resolve()
+GENERATED_DIR = args.generated_dir.resolve()
+RESULTS_PATH = args.results.resolve()
 
 RUNS_PER_CONFIGURATION = 3
 

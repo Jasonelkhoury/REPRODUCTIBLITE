@@ -1,2 +1,4 @@
 .venv/
 part6/generated/
+part8/generated_numeric_precision
+part8/generated_interval_causality

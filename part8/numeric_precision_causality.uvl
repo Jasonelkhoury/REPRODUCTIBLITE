@@ -1,0 +1,98 @@
+// Reproducibility experiment - Variability model - 520 possible configurations
+
+features
+    Experiment
+        mandatory
+            Language {abstract}
+                alternative
+                    Python
+                        alternative
+                            CPython
+                            PyPy
+                    Java
+                        alternative
+                            OpenJDK
+                            GraalVM
+
+            Property {abstract}
+                alternative
+                    Associativity
+                    Distributivity
+
+            Repetitions {abstract}
+                alternative
+                    Tests100
+                    Tests1000
+                    Tests10_000
+                    Tests100_000
+                    Tests1_000_000
+
+            Interval {abstract}
+                alternative
+                    Interval01
+                    Interval1_000_000
+
+            Seed {abstract}
+                alternative
+                    Seed42
+                    Seed152
+
+            NumericType {abstract}
+                alternative
+                    PythonNumericType {abstract}
+                        alternative
+                            PythonFloat32
+                            PythonFloat64
+                    JavaNumericType {abstract}
+                        alternative
+                            JavaFloat
+                            JavaDouble
+
+            RandomGenerator {abstract}
+                alternative
+                    JavaRandomGenerator {abstract}
+                        alternative
+                            JavaRandom
+                            JavaSplittableRandom
+                    PythonRandomGenerator {abstract}
+                        alternative
+                            PythonRandom
+                            PythonNumPyRandom
+
+constraints
+    // Language and runtime compatibility
+    CPython => Python
+    PyPy => Python
+    OpenJDK => Java
+    GraalVM => Java
+
+    // Random generator compatibility
+    Python => PythonRandomGenerator
+    Java => JavaRandomGenerator
+
+    PythonRandomGenerator => Python
+    JavaRandomGenerator => Java
+
+    // Numeric type compatibility
+    Python => PythonNumericType
+    Java => JavaNumericType
+
+    PythonNumericType => Python
+    JavaNumericType => Java
+
+    // PyPy compatibility restrictions
+    PyPy => !PythonFloat32
+    PyPy => !PythonNumPyRandom
+
+    // Controlled experiment: isolate numeric precision
+
+    Python
+    CPython
+    Associativity
+    Tests100_000
+    Interval01
+    Seed42
+    PythonRandom
+    !JavaNumericType
+
+
