@@ -19,7 +19,7 @@ class cli:
         different_count = repetitions - equal_count
         percentage = equal_count / repetitions * 100
         
-        with open("answer_associativity_cli.txt", "w") as file:
+        with open("part3.2/answer_associativity_cli.txt", "w") as file:
             file.write(f"Number of tests: {repetitions}\n")
             file.write(f"Min value: {min_value}\n")
             file.write(f"Max value: {max_value}\n")

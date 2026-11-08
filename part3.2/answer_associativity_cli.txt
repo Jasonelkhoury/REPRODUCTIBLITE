@@ -1,6 +1,6 @@
 Number of tests: 100
-Min value: -100000.0
-Max value: 100000.0
-Equal results: 87
-Different results: 13
-Percentage of equality: 87.000000%
+Min value: -1000000.0
+Max value: 1000000.0
+Equal results: 96
+Different results: 4
+Percentage of equality: 96.000000%

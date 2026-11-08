@@ -7,7 +7,7 @@ class runtime_parameters:
         MIN_VALUE = 0
         MAX_VALUE = 1
 
-        with open("answer_associativity_runtime_parameters.txt", "w") as file:
+        with open("part3.1/answer_associativity_runtime_parameters.txt", "w") as file:
 
             for number_of_tests in REPETITIONS:
                 random.seed(152)
