@@ -229,3 +229,12 @@ python3 part6/run_experiments.py \
 ```
 
 Les résultats de ces deux études sont enregistrés respectivement dans [`numeric_precision_causality_results.csv`](part8/numeric_precision_causality_results.csv) et [`interval_causality_results.csv`](part8/interval_causality_results.csv). Leur analyse est également disponible dans le notebook [`results_analysis.ipynb`](part8/results_analysis.ipynb).
+
+
+## Usage de l'IA
+
+- Lors de ce TP, l'IA a été utilisée pour générer les programmes qui devaient l'être conformément aux consignes. Ces programmes sont disponibles dans le dossier [`llm`](llm/).
+
+- L'IA a également été utilisée pour debugger et refactoriser le code de certains scripts : [`part6/run_experiments.py`](part6/run_experiments.py) et [`.github/workflows/experiments.yml`](.github/workflows/experiments.yml). À noter que ces fichiers ont d'abord été conçus et développés sans l'aide de l'IA ; celle-ci est intervenue uniquement dans une étape ultérieure de debugging et de refactoring. Enfin, l'IA a aussi été utilisée pour identifier les images Docker utilisées dans le script  [`part6/build_docker_images.py`](part6/build_docker_images.py).
+
+- Enfin, l'IA a été utilisée pour corriger certaines tournures de phrases et formulations dans le notebook d'analyse des résultats [`part8/results_analysis.ipynb`](part8/results_analysis.ipynb), ainsi que dans ce README.
